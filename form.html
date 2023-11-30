@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees Login Time</title>
+    <link rel="icon" href="images.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head>
+  <body>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="images.png" alt="">
+        </div>
+        <div class="text-center mt-4 name">
+            Employees Login Details
+        </div>
+        <form class="p-3 mt-3">
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="userName" id="hello" placeholder="Username">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <select id="time" >
+                  <option value="8">8 AM</option>
+                  <option value="9">9 AM</option>
+                  <option value="10">10 AM</option>
+                  <option value="11">11 AM</option>
+                </select><br>
+            </div>
+            <button type="button" class="btn mt-3" onclick='values()'>Save</button>
+            <button type="button" class="btn mt-3" onclick='ne()'>Employees deatls</button>
+            <button type="button" class="btn mt-3" onclick='later()'>Employees Late</button>
+            <button type="button" class="btn mt-3" onclick='early()'>Employees Early</button>
+            <button type="button" class="btn mt-3" onclick='sorting()'>Sort</button>
+        </form>
+    </div>
+
+  
+    <script>
+      let detail=[]
+      //let after_emp=[]
+
+      function values(){
+        let x=document.getElementById("hello").value;
+        let y=document.getElementById("time").value;
+        a=
+        detail.push({"Name":x,"Time":y});
+        document.getElementById('hello').value = ''
+        document.getElementById('time').value = ''
+      }
+
+      function ne(){
+        console.log(detail);
+      }
+
+      // function after(){
+      //   for (let i=0; i<detail.length;i++){
+      //       if( detail[i]["Time"]>10){
+      //         after_emp.push(detail[i]["Name"]);
+      //       }
+      //     }
+      //   console.log(after_emp);
+      //   later()
+      //   }
+
+      function later(){
+        let late= detail.map((details)=>{   
+          return details.Time >10? details.Name:undefined; 
+        }); 
+        const filtered_late = late.filter(item => item !== undefined);
+        console.log("Employer who came Late")
+        console.log(filtered_late)
+      }
+
+      function early(){
+        let early= detail.filter((details)=>{   
+          return details.Time <=10? details.Name:undefined; 
+        }); 
+        const filter_early = early.filter(item => item !== undefined);
+        console.log("Employer who came Early")
+        console.log(filter_early.length)
+        }
+
+      function sorting() {
+        const reverseAlphabetical = (a, b) => {
+        const nameA = a.Name.toLowerCase(); // Convert names to lowercase for case-insensitive sorting
+        const nameB = b.Name.toLowerCase();
+
+        if (nameA < nameB) return 1;
+        if (nameA > nameB) return -1;
+        return 0;
+      };
+      detail.sort((a, b) => reverseAlphabetical(a, b));
+      console.log(detail);
+      }
+    </script>
+  </body>
+</html>
